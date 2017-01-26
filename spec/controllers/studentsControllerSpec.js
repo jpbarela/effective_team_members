@@ -1,27 +1,23 @@
+const studentFactory = require('../factories/studentFactory');
 const studentModel = require('../../models').student;
 const studentController = require('../../controllers/studentsController');
+const { verifySent } = require('../support/helpers');
 
 describe('studentsController', () => {
   function yearsAgo(years) {
     return new Date(new Date() - (1000 * 60 * 60 * 24 * 365 * years));
   }
 
-  function verifySent(mock, data) {
-    expect(mock).toHaveBeenCalledWith({
-      students: data.map(student => jasmine.objectContaining(student)),
-    });
-  }
-
   function createStudentData(studentData, context) {
-    return studentModel
-      .remove({})
-      .then(() => studentModel.create(studentData))
+    return studentFactory
+      .reset()
+      .then(() => studentFactory.createStudents(studentData))
       .then((results) => {
         context.students = results;
       });
   }
 
-  describe('createStudent', () => {
+  describe('#createStudent', () => {
     beforeAll((done) => {
       const self = this;
 
@@ -55,7 +51,7 @@ describe('studentsController', () => {
     });
   });
 
-  describe('find', () => {
+  describe('#find', () => {
     beforeAll((done) => {
       const self = this;
 
@@ -74,11 +70,11 @@ describe('studentsController', () => {
     });
 
     it('calls the response with the document', () => {
-      verifySent(this.response.json, this.studentData);
+      verifySent(this.response.json, this.studentData, 'students');
     });
   });
 
-  describe('getAll', () => {
+  describe('#getAll', () => {
     beforeAll((done) => {
       const self = this;
 
@@ -99,7 +95,7 @@ describe('studentsController', () => {
     });
 
     it('calls response json with the array', () => {
-      verifySent(this.response.json, this.studentData);
+      verifySent(this.response.json, this.studentData, 'students');
     });
   });
 });
