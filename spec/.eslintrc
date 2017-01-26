@@ -1,0 +1,11 @@
+{
+  "env": {
+    "jasmine": true
+  },
+  "extends": "airbnb",
+  "plugins": ["jasmine"],
+  "rules" :{
+    "no-underscore-dangle": ["error", {"allow": ["_id"]}],
+    "no-param-reassign": ["error", { "props": false }]
+  }
+}

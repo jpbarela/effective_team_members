@@ -12,13 +12,13 @@ describe('studentsController', () => {
     });
   }
 
-  function createStudentData(studentData, context){
+  function createStudentData(studentData, context) {
     return studentModel
       .remove({})
       .then(() => studentModel.create(studentData))
       .then((results) => {
         context.students = results;
-      })
+      });
   }
 
   describe('createStudent', () => {
