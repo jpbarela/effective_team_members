@@ -8,6 +8,6 @@ mongoose.Promise = global.Promise;
 const connection = mongoose.connect(config.db);
 
 module.exports = {
-	connection,
-	student
+  connection,
+  student,
 };
