@@ -1,0 +1,32 @@
+{
+  "name": "effective-team-member",
+  "version": "0.0.1",
+  "description": "Code examples for effective team member talk.",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mongoose": "^4.7.7"
+  },
+  "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
+    "jasmine": "^2.5.3"
+  },
+  "scripts": {
+    "start": "node app.js",
+    "lint": "eslint .",
+    "test": "MONGO_URI=mongodb://localhost/effective-team-member-test jasmine"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpbarela/effective_team_members.git"
+  },
+  "author": "JP Barela",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jpbarela/effective_team_members/issues"
+  },
+  "homepage": "https://github.com/jpbarela/effective_team_members#readme"
+}
