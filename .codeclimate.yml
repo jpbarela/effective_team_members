@@ -11,9 +11,6 @@ engines:
     checks:
       import/no-unresolved:
         enabled: false
-      new-cap:
-        enabled: true
-        capIsNewExceptions: ["express.Router", "Schema"]
   fixme:
     enabled: true
 ratings:

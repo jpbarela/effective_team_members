@@ -6,6 +6,21 @@ describe('studentsController', () => {
     return new Date(new Date() - (1000 * 60 * 60 * 24 * 365 * years));
   }
 
+  function verifySent(mock, data) {
+    expect(mock).toHaveBeenCalledWith({
+      students: data.map(student => jasmine.objectContaining(student)),
+    });
+  }
+
+  function createStudentData(studentData, context){
+    return studentModel
+      .remove({})
+      .then(() => studentModel.create(studentData))
+      .then((results) => {
+        context.students = results;
+      })
+  }
+
   describe('createStudent', () => {
     beforeAll((done) => {
       const self = this;
@@ -48,12 +63,7 @@ describe('studentsController', () => {
         { firstName: 'Test', lastName: 'User', birthday: yearsAgo(7) },
       ];
 
-      studentModel
-        .remove({})
-        .then(() => studentModel.create(self.studentData))
-        .then((results) => {
-          self.students = results;
-        })
+      createStudentData(self.studentData, self)
         .then(() => {
           const request = { params: { id: self.students[0]._id } };
           self.response = jasmine.createSpyObj('response', ['json']);
@@ -64,9 +74,7 @@ describe('studentsController', () => {
     });
 
     it('calls the response with the document', () => {
-      expect(this.response.json).toHaveBeenCalledWith({
-        students: this.studentData.map(student => jasmine.objectContaining(student)),
-      });
+      verifySent(this.response.json, this.studentData);
     });
   });
 
@@ -80,12 +88,7 @@ describe('studentsController', () => {
         { firstName: 'Fake', lastName: 'Person', birthday: yearsAgo(7) },
       ];
 
-      studentModel
-        .remove({})
-        .then(() => studentModel.create(self.studentData))
-        .then((results) => {
-          self.students = results;
-        })
+      createStudentData(self.studentData, self)
         .then(() => {
           const request = {};
           self.response = jasmine.createSpyObj('response', ['json']);
@@ -96,9 +99,7 @@ describe('studentsController', () => {
     });
 
     it('calls response json with the array', () => {
-      expect(this.response.json).toHaveBeenCalledWith({
-        students: this.studentData.map(student => jasmine.objectContaining(student)),
-      });
+      verifySent(this.response.json, this.studentData);
     });
   });
 });
