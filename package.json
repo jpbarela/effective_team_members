@@ -14,12 +14,14 @@
     "eslint-plugin-jasmine": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^3.0.2",
     "eslint-plugin-react": "^6.9.0",
-    "jasmine": "^2.5.3"
+    "jasmine": "^2.5.3",
+    "nodemon": "^1.11.0"
   },
   "scripts": {
     "start": "node app.js",
     "lint": "eslint .",
-    "test": "MONGO_URI=mongodb://localhost/effective-team-member-test jasmine"
+    "test": "MONGO_URI=mongodb://localhost/effective-team-member-test jasmine",
+    "local": "nodemon"
   },
   "repository": {
     "type": "git",
