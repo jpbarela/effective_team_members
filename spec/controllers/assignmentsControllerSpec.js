@@ -11,9 +11,9 @@ describe('assignmentsController', () => {
       .reset()
       .then(() => studentFactory.createStudents())
       .then((result) => {
-        self.student = result
+        self.student = result;
       })
-      .then(done)
+      .then(done);
   });
 
   describe('#createAssignment', () => {
@@ -21,7 +21,7 @@ describe('assignmentsController', () => {
       const self = this;
 
       self.response = jasmine.createSpyObj('response', ['json', 'status']);
-      self.assignmentBody = {name: 'Test Assignment', score: 100};
+      self.assignmentBody = { name: 'Test Assignment', score: 100 };
 
       assignmentsController
         .createAssignment(
@@ -36,7 +36,7 @@ describe('assignmentsController', () => {
 
     it('returns the assignment', () => {
       const student = Object.assign(this.assignmentBody, { studentId: this.student._id });
-      verifySent(this.response.json, [ student ], 'assignments')
+      verifySent(this.response.json, [student], 'assignments');
     });
   });
 
@@ -45,23 +45,21 @@ describe('assignmentsController', () => {
       const self = this;
 
       self.assignments = [
-        { name: 'First Assignment', score: 78, studentId: self.student._id},
-        { name:  'Midterm', score: 85, studentId: self.student._id },
-        { name: 'Final Exam', score: 68, studentId: self.student._id }
+        { name: 'First Assignment', score: 78, studentId: self.student._id },
+        { name: 'Midterm', score: 85, studentId: self.student._id },
+        { name: 'Final Exam', score: 68, studentId: self.student._id },
       ];
 
       assignmentModel
         .remove({})
-        .then(() => {
-          return assignmentModel.create(self.assignments)
-        })
+        .then(() => assignmentModel.create(self.assignments))
         .then(() => {
           const request = { params: { studentId: self.student._id } };
           self.response = jasmine.createSpyObj('response', ['json']);
 
           return assignmentsController.getAll(request, self.response);
         })
-        .then(done)
+        .then(done);
     });
 
     it('returns the assignments', () => {

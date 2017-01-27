@@ -5,10 +5,10 @@ function createAssignment(req, res) {
 
   return assignmentModel
     .create(student)
-    .then((student) => {
+    .then((createdStudent) => {
       res.status(201);
-      res.json({ assignments: [ student ] })
-    })
+      res.json({ assignments: [createdStudent] });
+    });
 }
 
 function getAll(req, res) {
@@ -16,11 +16,11 @@ function getAll(req, res) {
     .find({ studentId: req.params.studentId })
     .exec()
     .then((results) => {
-      res.json({ assignments: results })
-    })
+      res.json({ assignments: results });
+    });
 }
 
 module.exports = {
   createAssignment,
-  getAll
+  getAll,
 };

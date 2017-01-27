@@ -5,5 +5,5 @@ function verifySent(mock, data, resource) {
 }
 
 module.exports = {
-  verifySent
+  verifySent,
 };

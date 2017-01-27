@@ -1,21 +1,22 @@
 const studentModel = require('../../models').student;
 
-function createStudents(studentOrArray){
+function createStudents(studentOrArray) {
+  let data;
+
   if (studentOrArray === undefined) {
-    const data = { firstName: 'test', lastName: 'User', birthday: new Date() };
+    data = { firstName: 'test', lastName: 'User', birthday: new Date() };
+  } else {
+    data = studentOrArray;
   }
-  else {
-    const data = studentOrArray;
-  }
-  return studentModel.create(studentOrArray)
+  return studentModel.create(data);
 }
 
 function reset() {
   return studentModel
-    .remove({})
+    .remove({});
 }
 
 module.exports = {
   createStudents,
-  reset
+  reset,
 };
